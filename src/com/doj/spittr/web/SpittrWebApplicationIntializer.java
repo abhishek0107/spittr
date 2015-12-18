@@ -5,11 +5,12 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import com.doj.spittr.persistence.config.SpittrPersistenceConfig;
 import com.doj.spittr.web.config.SpittrMvcConfiguration;
 
 public class SpittrWebApplicationIntializer implements WebApplicationInitializer{
@@ -21,8 +22,9 @@ public class SpittrWebApplicationIntializer implements WebApplicationInitializer
 	}
 	
 	private void registerListener(ServletContext servletContext) {
-        servletContext.addListener(new RequestContextListener());
-
+		AnnotationConfigWebApplicationContext rootContext;
+        rootContext = createContext(SpittrPersistenceConfig.class);
+        servletContext.addListener(new ContextLoaderListener(rootContext));
     }
 	
 	private void registerDispatcherServlet(ServletContext servletContext) {

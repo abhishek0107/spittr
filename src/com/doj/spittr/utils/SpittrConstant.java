@@ -1,8 +1,8 @@
 package com.doj.spittr.utils;
 
 public interface SpittrConstant {
-
-String TILES = "/WEB-INF/views/tiles/tiles-defs.xml";
+	
+	String TILES = "/WEB-INF/views/tiles/tiles-defs.xml";
 	
 	/*Static resources*/
 	

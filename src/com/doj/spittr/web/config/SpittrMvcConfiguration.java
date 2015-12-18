@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
@@ -22,7 +20,7 @@ import com.doj.spittr.utils.SpittrConstant;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = { "com.doj.spittr.web" })
+@ComponentScan(basePackages = { "com.doj.spittr" })
 public class SpittrMvcConfiguration extends WebMvcConfigurerAdapter{
 	
 	@Override
@@ -62,6 +60,7 @@ public class SpittrMvcConfiguration extends WebMvcConfigurerAdapter{
         resolver.setSuffix(".jsp");
         return resolver;
     }*/
+	
 	@Bean
 	public TilesViewResolver configureTilesViewResolver() {
 		return new TilesViewResolver();
@@ -79,6 +78,6 @@ public class SpittrMvcConfiguration extends WebMvcConfigurerAdapter{
 		TilesConfigurer configurer = new TilesConfigurer();
 		configurer.setDefinitions(new String[] { SpittrConstant.TILES });
 		return configurer;
+	}
 
-}
 }
