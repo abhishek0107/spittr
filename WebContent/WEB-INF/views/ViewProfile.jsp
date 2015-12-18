@@ -1,4 +1,5 @@
 <table class="profile_table">
+	${dlgn[0].lgnid}
 	<tr>
 		<td>Name</td><td>xyyyyyyyyyyyyyyyyyyy</td>
 	</tr>

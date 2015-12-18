@@ -1,12 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>Spittr</groupId>
+  <groupId>com.doj.Spittr</groupId>
   <artifactId>Spittr</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>Spittr</name>
-  <description>This is a social networking site like twittr</description>
-  <properties>
+  <description>This is an application about the social media like twitter</description>
+  
+   <properties>
 		<spring.version>4.0.0.RELEASE</spring.version>
 		<jstl.version>1.1.1</jstl.version>
         <logback.version>1.0.13</logback.version>
@@ -248,23 +249,20 @@
 		  </dependency>
 		
   </dependencies>
-  
-  
-  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
+        <version>3.1</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.6</source>
+          <target>1.6</target>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
-        <version>2.6</version>
+        <version>2.3</version>
         <configuration>
           <warSourceDirectory>WebContent</warSourceDirectory>
           <failOnMissingWebXml>false</failOnMissingWebXml>
