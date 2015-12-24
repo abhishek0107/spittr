@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.doj.spittr.entities.Dlgn;
+import com.doj.spittr.entities.Dusr;
 @Component
 public interface LgnService {
- public  List<Dlgn> getLoginDetailByUname(String Uname,String password);
+ public  List<Dusr> getLoginDetailByUname(String Uname,String password);
 }

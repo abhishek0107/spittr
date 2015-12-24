@@ -8,6 +8,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -26,27 +27,22 @@ public class Dusr implements Serializable {
 	private static final long serialVersionUID = 5371904985264645153L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long usrid;
-
 	private String usrfn;
 	private String usrln;
 	private String usreml;
 	private String usrpwd;
-	public String getUsrpwd() {
-		return usrpwd;
-	}
-
-	public void setUsrpwd(String usrpwd) {
-		this.usrpwd = usrpwd;
-	}
-
 	private Date usrdob;
 	private String usrphn;
-	private String usraddr1;
-	private String usraddr2;
-	private Long usrcity;
-	private Long usrstate;
+	private String usrAddr1;
+	private Long usrCity;
+	private Long usrState;
+	private Long usrCountry;
+	private String url;
+	private String hobbies;
+	private String usrProfession;
+	private String aboutme;
 	private Date createdate;
 	private Date modidate;
 	private Long photoid;
@@ -54,6 +50,73 @@ public class Dusr implements Serializable {
 	private Long exfield2;
 	private String isdeleted;
 	private String active;
+	private String usrImg;
+	
+	public String getUsrImg() {
+		return usrImg;
+	}
+
+	public void setUsrImg(String usrImg) {
+		this.usrImg = usrImg;
+	}
+
+	public Long getUsrCountry() {
+		return usrCountry;
+	}
+
+	public void setUsrCountry(Long usrCountry) {
+		this.usrCountry = usrCountry;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Long getUsrCity() {
+		return usrCity;
+	}
+
+	public void setUsrCity(Long usrCity) {
+		this.usrCity = usrCity;
+	}
+
+	public Long getUsrState() {
+		return usrState;
+	}
+
+	public void setUsrState(Long usrState) {
+		this.usrState = usrState;
+	}
+
+	public String getHobbies() {
+		return hobbies;
+	}
+
+	public void setHobbies(String hobbies) {
+		this.hobbies = hobbies;
+	}
+
+	public String getUsrProfession() {
+		return usrProfession;
+	}
+
+	public void setUsrProfession(String usrProfession) {
+		this.usrProfession = usrProfession;
+	}
+
+	public String getAboutme() {
+		return aboutme;
+	}
+
+	public void setAboutme(String aboutme) {
+		this.aboutme = aboutme;
+	}
+
+
 
 	public Long getUsrid() {
 		return usrid;
@@ -104,35 +167,35 @@ public class Dusr implements Serializable {
 	}
 
 	public String getUsraddr1() {
-		return usraddr1;
+		return usrAddr1;
 	}
 
 	public void setUsraddr1(String usraddr1) {
-		this.usraddr1 = usraddr1;
+		this.usrAddr1 = usraddr1;
 	}
 
 	public String getUsraddr2() {
-		return usraddr2;
+		return usrAddr2;
 	}
 
 	public void setUsraddr2(String usraddr2) {
-		this.usraddr2 = usraddr2;
+		this.usrAddr2 = usraddr2;
 	}
 
 	public Long getUsrcity() {
-		return usrcity;
+		return usrCity;
 	}
 
 	public void setUsrcity(Long usrcity) {
-		this.usrcity = usrcity;
+		this.usrCity = usrcity;
 	}
 
 	public Long getUsrstate() {
-		return usrstate;
+		return usrState;
 	}
 
 	public void setUsrstate(Long usrstate) {
-		this.usrstate = usrstate;
+		this.usrState = usrstate;
 	}
 
 	public Date getCreatedate() {
@@ -190,6 +253,29 @@ public class Dusr implements Serializable {
 	public void setActive(String active) {
 		this.active = active;
 	}
+	public String getUsrpwd() {
+		return usrpwd;
+	}
+
+	public void setUsrpwd(String usrpwd) {
+		this.usrpwd = usrpwd;
+	}
+	public String getUsrAddr1() {
+		return usrAddr1;
+	}
+
+	public void setUsrAddr1(String usrAddr1) {
+		this.usrAddr1 = usrAddr1;
+	}
+
+	private String usrAddr2;
+	public String getUsrAddr2() {
+		return usrAddr2;
+	}
+
+	public void setUsrAddr2(String usrAddr2) {
+		this.usrAddr2 = usrAddr2;
+	}
 
 	public Dusr() {
 		super();
@@ -205,10 +291,10 @@ public class Dusr implements Serializable {
 		this.usreml = usreml;
 		this.usrdob = usrdob;
 		this.usrphn = usrphn;
-		this.usraddr1 = usraddr1;
-		this.usraddr2 = usraddr2;
-		this.usrcity = usrcity;
-		this.usrstate = usrstate;
+		this.usrAddr1 = usraddr1;
+		this.usrAddr2 = usraddr2;
+		this.usrCity = usrcity;
+		this.usrState = usrstate;
 		this.createdate = createdate;
 		this.modidate = modidate;
 		this.photoid = photoid;
@@ -222,16 +308,22 @@ public class Dusr implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((aboutme == null) ? 0 : aboutme.hashCode());
 		result = prime * result + ((active == null) ? 0 : active.hashCode());
 		result = prime * result + ((createdate == null) ? 0 : createdate.hashCode());
 		result = prime * result + ((exfield1 == null) ? 0 : exfield1.hashCode());
 		result = prime * result + ((exfield2 == null) ? 0 : exfield2.hashCode());
+		result = prime * result + ((hobbies == null) ? 0 : hobbies.hashCode());
 		result = prime * result + ((isdeleted == null) ? 0 : isdeleted.hashCode());
 		result = prime * result + ((modidate == null) ? 0 : modidate.hashCode());
 		result = prime * result + ((photoid == null) ? 0 : photoid.hashCode());
-		result = prime * result + ((usraddr1 == null) ? 0 : usraddr1.hashCode());
-		result = prime * result + ((usraddr2 == null) ? 0 : usraddr2.hashCode());
-		result = prime * result + ((usrcity == null) ? 0 : usrcity.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		result = prime * result + ((usrAddr1 == null) ? 0 : usrAddr1.hashCode());
+		result = prime * result + ((usrAddr2 == null) ? 0 : usrAddr2.hashCode());
+		result = prime * result + ((usrCity == null) ? 0 : usrCity.hashCode());
+		result = prime * result + ((usrCountry == null) ? 0 : usrCountry.hashCode());
+		result = prime * result + ((usrProfession == null) ? 0 : usrProfession.hashCode());
+		result = prime * result + ((usrState == null) ? 0 : usrState.hashCode());
 		result = prime * result + ((usrdob == null) ? 0 : usrdob.hashCode());
 		result = prime * result + ((usreml == null) ? 0 : usreml.hashCode());
 		result = prime * result + ((usrfn == null) ? 0 : usrfn.hashCode());
@@ -239,7 +331,6 @@ public class Dusr implements Serializable {
 		result = prime * result + ((usrln == null) ? 0 : usrln.hashCode());
 		result = prime * result + ((usrphn == null) ? 0 : usrphn.hashCode());
 		result = prime * result + ((usrpwd == null) ? 0 : usrpwd.hashCode());
-		result = prime * result + ((usrstate == null) ? 0 : usrstate.hashCode());
 		return result;
 	}
 
@@ -252,6 +343,11 @@ public class Dusr implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Dusr other = (Dusr) obj;
+		if (aboutme == null) {
+			if (other.aboutme != null)
+				return false;
+		} else if (!aboutme.equals(other.aboutme))
+			return false;
 		if (active == null) {
 			if (other.active != null)
 				return false;
@@ -272,6 +368,11 @@ public class Dusr implements Serializable {
 				return false;
 		} else if (!exfield2.equals(other.exfield2))
 			return false;
+		if (hobbies == null) {
+			if (other.hobbies != null)
+				return false;
+		} else if (!hobbies.equals(other.hobbies))
+			return false;
 		if (isdeleted == null) {
 			if (other.isdeleted != null)
 				return false;
@@ -287,20 +388,40 @@ public class Dusr implements Serializable {
 				return false;
 		} else if (!photoid.equals(other.photoid))
 			return false;
-		if (usraddr1 == null) {
-			if (other.usraddr1 != null)
+		if (url == null) {
+			if (other.url != null)
 				return false;
-		} else if (!usraddr1.equals(other.usraddr1))
+		} else if (!url.equals(other.url))
 			return false;
-		if (usraddr2 == null) {
-			if (other.usraddr2 != null)
+		if (usrAddr1 == null) {
+			if (other.usrAddr1 != null)
 				return false;
-		} else if (!usraddr2.equals(other.usraddr2))
+		} else if (!usrAddr1.equals(other.usrAddr1))
 			return false;
-		if (usrcity == null) {
-			if (other.usrcity != null)
+		if (usrAddr2 == null) {
+			if (other.usrAddr2 != null)
 				return false;
-		} else if (!usrcity.equals(other.usrcity))
+		} else if (!usrAddr2.equals(other.usrAddr2))
+			return false;
+		if (usrCity == null) {
+			if (other.usrCity != null)
+				return false;
+		} else if (!usrCity.equals(other.usrCity))
+			return false;
+		if (usrCountry == null) {
+			if (other.usrCountry != null)
+				return false;
+		} else if (!usrCountry.equals(other.usrCountry))
+			return false;
+		if (usrProfession == null) {
+			if (other.usrProfession != null)
+				return false;
+		} else if (!usrProfession.equals(other.usrProfession))
+			return false;
+		if (usrState == null) {
+			if (other.usrState != null)
+				return false;
+		} else if (!usrState.equals(other.usrState))
 			return false;
 		if (usrdob == null) {
 			if (other.usrdob != null)
@@ -337,21 +458,17 @@ public class Dusr implements Serializable {
 				return false;
 		} else if (!usrpwd.equals(other.usrpwd))
 			return false;
-		if (usrstate == null) {
-			if (other.usrstate != null)
-				return false;
-		} else if (!usrstate.equals(other.usrstate))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Dusr [usrid=" + usrid + ", usrfn=" + usrfn + ", usrln=" + usrln + ", usreml=" + usreml + ", usrpwd="
-				+ usrpwd + ", usrdob=" + usrdob + ", usrphn=" + usrphn + ", usraddr1=" + usraddr1 + ", usraddr2="
-				+ usraddr2 + ", usrcity=" + usrcity + ", usrstate=" + usrstate + ", createdate=" + createdate
-				+ ", modidate=" + modidate + ", photoid=" + photoid + ", exfield1=" + exfield1 + ", exfield2="
-				+ exfield2 + ", isdeleted=" + isdeleted + ", active=" + active + "]";
+				+ usrpwd + ", usrdob=" + usrdob + ", usrphn=" + usrphn + ", usrAddr1=" + usrAddr1 + ", usrAddr2="
+				+ usrAddr2 + ", usrCity=" + usrCity + ", usrState=" + usrState + ", usrCountry=" + usrCountry + ", url="
+				+ url + ", hobbies=" + hobbies + ", usrProfession=" + usrProfession + ", aboutme=" + aboutme
+				+ ", createdate=" + createdate + ", modidate=" + modidate + ", photoid=" + photoid + ", exfield1="
+				+ exfield1 + ", exfield2=" + exfield2 + ", isdeleted=" + isdeleted + ", active=" + active + "]";
 	}
 
 }

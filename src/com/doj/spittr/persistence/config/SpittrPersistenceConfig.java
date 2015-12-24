@@ -26,7 +26,14 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.doj.spittr.entities.DAppImage;
+import com.doj.spittr.entities.DAppMaster;
+import com.doj.spittr.entities.Dflwr;
 import com.doj.spittr.entities.Dlgn;
+import com.doj.spittr.entities.Dtweet;
+import com.doj.spittr.entities.Dusr;
+import com.doj.spittr.entities.DusrRole;
+import com.doj.spittr.entities.PasswordManagement;
 
 /**
  * @author Dinesh.Rajput
@@ -61,6 +68,13 @@ public class SpittrPersistenceConfig {
 	    public SessionFactory getSessionFactory(DataSource dataSource) {
 	    	LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 	    	sessionBuilder.addAnnotatedClass(Dlgn.class);
+	    	sessionBuilder.addAnnotatedClass(Dusr.class);
+	    	sessionBuilder.addAnnotatedClass(DAppMaster.class);
+	    	sessionBuilder.addAnnotatedClass(Dflwr .class);
+	    	sessionBuilder.addAnnotatedClass(DAppImage.class);
+	    	sessionBuilder.addAnnotatedClass(Dtweet.class);
+	    	sessionBuilder.addAnnotatedClass(DusrRole.class);
+	    	sessionBuilder.addAnnotatedClass(PasswordManagement.class);
 	    	return sessionBuilder.buildSessionFactory();
 	    }
 

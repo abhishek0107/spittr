@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.doj.spittr.entities.Dlgn;
+import com.doj.spittr.entities.Dusr;
 import com.doj.spittr.repositories.LoginDao;
 
 @Service
@@ -21,7 +22,7 @@ public class LgnServiceImpl implements LgnService {
 	}
 	
 	@Override
-	public List<Dlgn> getLoginDetailByUname(String Uname, String password) {
+	public List<Dusr> getLoginDetailByUname(String Uname, String password) {
 		if(loginDao!=null){
 			return  this.loginDao.getUserDetail(Uname, password);
 		}

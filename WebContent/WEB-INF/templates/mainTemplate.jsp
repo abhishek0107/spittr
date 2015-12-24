@@ -43,9 +43,13 @@
 		<div id="home_nav" class='home_nav'>			
 			<tiles:insertAttribute name="leftNav-top" />
 			<tiles:insertAttribute name="myprofile-leftNav-top" />			
-			<tiles:insertAttribute name="leftNav" />
+			<tiles:insertAttribute name="leftNav" />		
+			
 		</div>
-		<div id="section"><tiles:insertAttribute name="body" /></div>
+		<div id="section">
+			<tiles:insertAttribute name="body" />			
+		</div>
+		
 		<div id="footer"><tiles:insertAttribute name="footer" /></div>
   </body>
 </html>

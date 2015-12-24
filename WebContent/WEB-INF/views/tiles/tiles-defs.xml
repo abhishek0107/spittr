@@ -32,6 +32,7 @@
 	</definition>
 	<definition name="changePicture" extends="mainTemplate">
 		<put-attribute name="title" value="My Profile | Spittr.com | DOJ Software"></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/templates/header.jsp" />
 		<put-attribute name="leftNav-top" value="/WEB-INF/templates/home-leftNav-top.jsp" />
 		<put-attribute name="myprofile-leftNav-top" value="/WEB-INF/templates/viewProfile-leftNav-top.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/changeProfilePic.jsp"></put-attribute>

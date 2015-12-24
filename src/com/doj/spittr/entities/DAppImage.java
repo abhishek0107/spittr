@@ -8,9 +8,10 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+import java.sql.Blob;
 /**
  * @author Dinesh.Rajput
  *
@@ -25,9 +26,9 @@ public class DAppImage implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long appimgid;
-	private String appimgdata;
+	private  Blob appimgdata;
 	private String appimgtype;
 	private Long appimgusrid;
 	private Date modidate;
@@ -40,10 +41,10 @@ public class DAppImage implements Serializable{
 	public void setAppimgid(Long appimgid) {
 		this.appimgid = appimgid;
 	}
-	public String getAppimgdata() {
-		return appimgdata;
+	public Blob getAppimgdata() {
+		return (Blob) appimgdata;
 	}
-	public void setAppimgdata(String appimgdata) {
+	public void setAppimgdata(Blob appimgdata) {
 		this.appimgdata = appimgdata;
 	}
 	public String getAppimgtype() {
@@ -77,7 +78,7 @@ public class DAppImage implements Serializable{
 		this.appimgmod = appimgmod;
 	}
 	
-	public DAppImage(Long appimgid, String appimgdata, String appimgtype,
+	public DAppImage(Long appimgid, Blob appimgdata, String appimgtype,
 			Long appimgusrid, Date modidate, Date createdate, Long appimgmod) {
 		super();
 		this.appimgid = appimgid;

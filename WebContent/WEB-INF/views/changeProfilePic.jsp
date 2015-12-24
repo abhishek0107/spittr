@@ -1,9 +1,6 @@
 <%@include file="/WEB-INF/templates/include.jsp"%>
 <style type="text/css">
-    	.uploadFile{
-    		visibility : hidden;
-    	}
-	</style>
+</style>
 	<script src="<%=SpittrConstant.JSROOTURL%>jquery.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="<%=SpittrConstant.JSROOTURL%>script.js"></script>
@@ -16,10 +13,13 @@
 	  	 });
    </script>
 <div>
-	<font size="2px;">Click on image to change</font><br>
 	
-	<a href="javascript:void(0)" id="uploadIcon2" class="img_profile">
-		<img src="images/profile_default.png"  width="200px" height="200px" alt="upload photo"/>
-	</a>
-	<input type="file" value="upload" id="uploadFile" class="uploadFile" />
 </div>
+<img src="data:image/jpeg;base64,${imgData}" alt="..." width="200" height="200">
+<form:form method="post" action="changePic" enctype="multipart/form-data" modelAttribute="dAppImage">
+<form:hidden path="appimgusrid"/>
+	<input type="file" name="file" value="" id="file" />
+	<input type="submit"  value="Change Picture"/>
+</form:form>
+
+<%-- <img src="${pageContext.servletContext.contextPath }/ImageServlet?id=${dusr.usrid}" /> --%>

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.doj.spittr.entities.Dlgn;
+import com.doj.spittr.entities.Dusr;
 @Repository
 @Transactional
 public class LoginDaoImpl implements LoginDao{
@@ -21,16 +22,16 @@ public class LoginDaoImpl implements LoginDao{
 	
 	
 	@Override
-	public List<Dlgn> getUserDetail(String email,String password) {
+	public List<Dusr> getUserDetail(String email,String password) {
 			 
 		Session session = this.sessionFactory.openSession(); 
-		Query query=session.createQuery("from Dlgn where LGNUN=:email AND LGNPWD=:pwd");
+		Query query=session.createQuery("from Dusr where usreml=:email AND usrpwd=:pwd");
 		query.setParameter("email", email);
 		query.setParameter("pwd", password);
 		@SuppressWarnings("unchecked")
-		List<Dlgn> dlgn=query.list();
-		if(dlgn!=null && !dlgn.isEmpty()){
-			return dlgn;
+		List<Dusr> dusr=query.list();
+		if(dusr!=null && !dusr.isEmpty()){
+			return dusr;
 		}
 		
 		

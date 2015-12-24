@@ -12,6 +12,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 import com.doj.spittr.persistence.config.SpittrPersistenceConfig;
 import com.doj.spittr.web.config.SpittrMvcConfiguration;
+import com.doj.spittr.web.controller.ImageServlet;
 
 public class SpittrWebApplicationIntializer implements WebApplicationInitializer{
 
@@ -23,7 +24,7 @@ public class SpittrWebApplicationIntializer implements WebApplicationInitializer
 	
 	private void registerListener(ServletContext servletContext) {
 		AnnotationConfigWebApplicationContext rootContext;
-        rootContext = createContext(SpittrPersistenceConfig.class);
+        rootContext = createContext(SpittrPersistenceConfig.class,ImageServlet.class);
         servletContext.addListener(new ContextLoaderListener(rootContext));
     }
 	
