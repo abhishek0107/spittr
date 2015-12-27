@@ -4,11 +4,11 @@
 	<form:hidden path="usrid" />
 	<p class="view-profile-nav">&nbsp;</p>
 	<ul>
-		<li><a href="<c:url value="/edit?id=${dusr.usrid}" />">Edit
+		<li><a href="<c:url value="/edit?id=${loginUser.usrid}" />">Edit
 				Profile</a></li>
-		<li><a href="<c:url value="/changePassword?id=${dusr.usrid}" />">Change
+		<li><a href="<c:url value="/changePassword?id=${loginUser.usrid}" />">Change
 				Password</a></li>
-		<li><a href="<c:url value="/changePicture?id=${dusr.usrid}" />">
+		<li><a href="<c:url value="/changePicture?id=${loginUser.usrid}" />">
 				changePicture</a></li>
 
 

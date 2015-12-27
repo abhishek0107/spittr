@@ -1,4 +1,6 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <div id="formId">
 	<form:form modelAttribute="dusr" class="form-style-7"
 		action="changeProfile">
@@ -27,17 +29,35 @@
 		<form:input path="usrAddr2" id="addressline2" />
 		<form:label path="usrCity">City</form:label>
 		<form:input path="usrCity" id="City" />
+		
+		 <form:select path="usrCountry" id="Country">
+			<option selected>Select country</option>	
+			<c:forEach items="${Country}" var="Country">
+				<c:choose>	
+					<c:when test="${loginUser.usrCountry eq Country.appmasid}">
+						<option selected value="${Country.appmasid}">${Country.appmasdesc}</option>
+					</c:when>
+					<c:otherwise >
+						<option value="${Country.appmasid}">${Country.appmasdesc}</option>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		</form:select>
 		<form:select path="usrState" id="State">
 			<option selected>Select State</option>
-			<option>Delhi</option>
-			<option>Uttar Pradesh</option>
-			<option>Punjab</option>
-		</form:select>
-		<form:select path="usrCountry" id="Country">
-			<option selected>Select country</option>
-			<option>India</option>
-			<option>USA</option>
-			<option>Japan</option>
+			
+				<c:forEach items="${State}" var="State">					
+					<c:choose>
+						<c:when test="${loginUser.usrState eq State.appmasid}">					
+						<option selected value="${State.appmasid}">${State.appmasdesc}</option>
+					</c:when>
+								
+					<c:otherwise >					
+						<option value="${State.appmasid}">${State.appmasdesc}</option>
+					</c:otherwise>
+					</c:choose>
+					
+				</c:forEach>
 		</form:select>
 		</fieldset>
 	<input type="submit" value="Save" /> <input type="submit" value="Cancel" />

@@ -8,7 +8,6 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -16,24 +15,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.doj.spittr.entities.DAppImage;
 import com.doj.spittr.entities.Dtweet;
 import com.doj.spittr.entities.Dusr;
+import com.doj.spittr.service.AppDataMasterService;
 import com.doj.spittr.service.DAppImgService;
 import com.doj.spittr.service.DflwrService;
 import com.doj.spittr.service.DtweetService;
-import com.doj.spittr.service.DusrService;
 import com.doj.spittr.service.LgnService;
-
+import com.doj.spittr.service.SpittrMailService;
 @Controller
-@SessionAttributes("loginUser")
+@SessionAttributes({"loginUser", "Country", "State"})
 public class SpittrController {
-	@Autowired
-	private DusrService duService;
+	
 	@Autowired
 	private DflwrService dflwrService;
 	@Autowired
@@ -44,6 +41,11 @@ public class SpittrController {
 	private SessionFactory sessionFactory;
 	@Autowired
 	private DtweetService dtweetService;
+	
+	@Autowired
+    private SpittrMailService mailService;
+	@Autowired
+	private AppDataMasterService masterData;
 
 	@RequestMapping(value = { "/login" }, method = { RequestMethod.POST })
 	public String login(ModelMap model, @ModelAttribute("dusr") Dusr dusr, BindingResult result) {		
@@ -64,6 +66,8 @@ public class SpittrController {
 					loginUser.get(0).setUsrImg(encodedString);
 					model.addAttribute("dusr", new Dusr());
 					model.addAttribute("loginUser",loginUser.get(0));
+					model.addAttribute("Country", masterData.getMasterData("country"));
+					model.addAttribute("State", masterData.getMasterData("State"));
 					return "viewProfile";
 				}
 			}
@@ -210,6 +214,16 @@ public class SpittrController {
 		model.put("tab", "Followers");
 		return "followers";
 	}
+	
+	@RequestMapping(value={"/sendMail"})
+	public String sendMail(@ModelAttribute("dusr") Dusr dusr, BindingResult result){		
+		boolean b=mailService.sendMail(dusr.getUsreml());
+		if(b)
+			return "login";
+		else
+			return "login";
+	}
+	
 
 
 }

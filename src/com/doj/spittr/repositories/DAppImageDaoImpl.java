@@ -1,6 +1,5 @@
 package com.doj.spittr.repositories;
 
-import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.doj.spittr.entities.DAppImage;
-import com.doj.spittr.entities.Dusr;
 
 @Repository
 @Transactional
@@ -24,12 +22,9 @@ public class DAppImageDaoImpl implements DAppImageDao {
 
 	@Override
 	public void save(DAppImage img) {
-		DAppImage currImgDetail= getUserImgDetail(img);
-		System.out.println("currImgDetail:::"+ currImgDetail);
-		System.out.println("DAppImage:::"+ img);
+		DAppImage currImgDetail= getUserImgDetail(img);		
 		Session session = this.sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		
+		Transaction tx = session.beginTransaction();		
 		if(currImgDetail!=null){		
 			img.setAppimgid(currImgDetail.getAppimgid());
 			img.setModidate(new Date());
@@ -51,8 +46,7 @@ public class DAppImageDaoImpl implements DAppImageDao {
 		List<DAppImage> dAppImage = query.list();
 		if (dAppImage != null && !dAppImage.isEmpty()) {
 			session.close();
-			return dAppImage.get(0);
-			
+			return dAppImage.get(0);			
 		}
 		return null;
 	
@@ -65,7 +59,6 @@ public class DAppImageDaoImpl implements DAppImageDao {
 		@SuppressWarnings("unchecked")
 		List<DAppImage> dAppImage = query.list();
 		if (dAppImage != null && !dAppImage.isEmpty()) {
-
 			byte[] bytes;
 			try {
 				bytes = dAppImage.get(0).getAppimgdata().getBytes(1, (int) dAppImage.get(0).getAppimgdata().length());

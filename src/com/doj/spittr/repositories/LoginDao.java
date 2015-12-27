@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.doj.spittr.entities.Dlgn;
 import com.doj.spittr.entities.Dusr;
 @Component
 public interface LoginDao {

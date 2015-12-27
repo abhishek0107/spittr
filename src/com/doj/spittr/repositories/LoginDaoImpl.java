@@ -2,9 +2,6 @@ package com.doj.spittr.repositories;
 
 import java.util.List;
 
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.doj.spittr.entities.Dlgn;
 import com.doj.spittr.entities.Dusr;
 @Repository
 @Transactional

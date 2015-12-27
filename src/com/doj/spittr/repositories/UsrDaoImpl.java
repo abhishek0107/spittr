@@ -1,9 +1,6 @@
 package com.doj.spittr.repositories;
 
-import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -12,9 +9,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.doj.spittr.entities.Dflwr;
 import com.doj.spittr.entities.Dusr;
 import com.doj.spittr.entities.PasswordManagement;
 
@@ -28,6 +23,7 @@ public class UsrDaoImpl implements UsrDao{
 		Session session = this.sessionFactory.openSession();	
 		Query query=session.createQuery("from Dusr where usreml=:email");
 		query.setParameter("email", dusr.getUsreml());
+		@SuppressWarnings("unchecked")
 		List<Dusr> usr=query.list();
 		if(usr!=null && !usr.isEmpty()){
 			return null;
@@ -43,8 +39,14 @@ public class UsrDaoImpl implements UsrDao{
 	}
 	@Override
 	public Dusr modifyUser(Dusr dusr) {
-		Session session = this.sessionFactory.openSession();		
+		Session session = this.sessionFactory.openSession();
+		Dusr currentUserDetail=(Dusr) session.get(Dusr.class, dusr.getUsrid());
+		//need to change. 
+		session.close();
+		dusr.setUsrpwd(currentUserDetail.getUsrpwd());
+		session = this.sessionFactory.openSession();
 		Transaction tx=session.beginTransaction();
+		
 		session.update(dusr);
 		tx.commit();
 		session.close();
@@ -53,7 +55,6 @@ public class UsrDaoImpl implements UsrDao{
 	@Override
 	public Dusr getUserDetail(Dusr dusr) {
 		Session session = this.sessionFactory.openSession();
-		Transaction tx=session.beginTransaction();
 		dusr=(Dusr) session.get(Dusr.class, dusr.getUsrid());
 		session.close();
 		return dusr;
@@ -80,6 +81,19 @@ public class UsrDaoImpl implements UsrDao{
 			}
 		}
 		return currentUserDetail;
+	}
+	/* (non-Javadoc)
+	 * @see com.doj.spittr.repositories.UsrDao#getUsrDetailByEmail(java.lang.String)
+	 */
+	@Override
+	public Dusr getUsrDetailByEmail(String email) {
+		Session session = this.sessionFactory.openSession();
+		Query query=session.createQuery("FROM Dusr where usreml='"+email+"'");
+		@SuppressWarnings("unchecked")
+		List<Dusr> dusr=query.list();
+		if(dusr!=null && !dusr.isEmpty())
+			return dusr.get(0);
+		return null;
 	}
 
 

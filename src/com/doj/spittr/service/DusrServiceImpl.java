@@ -1,9 +1,7 @@
 package com.doj.spittr.service;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.doj.spittr.entities.Dusr;
 import com.doj.spittr.entities.PasswordManagement;
@@ -33,10 +31,17 @@ public class DusrServiceImpl implements DusrService{
 	 */
 	@Override
 	public Dusr changePassword(PasswordManagement passwordManagement) {
-		// TODO Auto-generated method stub
 		return this.usrDao.changePassword(passwordManagement);
 		
 	}
+	/* (non-Javadoc)
+	 * @see com.doj.spittr.service.DusrService#getUsrDetailByEmail()
+	 */
+	@Override
+	public Dusr getUsrDetailByEmail(String email) {
+		return this.usrDao.getUsrDetailByEmail(email);
+	}
+	 
 	
 
 }

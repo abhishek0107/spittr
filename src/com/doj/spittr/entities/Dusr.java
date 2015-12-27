@@ -50,7 +50,7 @@ public class Dusr implements Serializable {
 	private Long exfield2;
 	private String isdeleted;
 	private String active;
-	private String usrImg;
+	private transient String usrImg;
 	
 	public String getUsrImg() {
 		return usrImg;

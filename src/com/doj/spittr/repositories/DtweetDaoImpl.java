@@ -4,7 +4,6 @@
 package com.doj.spittr.repositories;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -49,6 +48,7 @@ public class DtweetDaoImpl implements DtweetDao{
 	/* (non-Javadoc)
 	 * @see com.doj.spittr.repositories.DtweetDao#readMessage()
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public String[] readMessage(@ModelAttribute("loginUser") Dusr loginUsr) {
 		Session session =this.sessionFactory.openSession();

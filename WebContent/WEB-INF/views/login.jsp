@@ -77,8 +77,8 @@ body {
 											placeholder="Password" size="50" />
 									</div>
 									<div class="input string optional">
-										<label class="string optional" path="usrpwd" for="user-pw-repeat">Repeat
-											password *</label> <form:password path="usrpwd" class="string optional" maxlength="255"
+										<form:label class="string optional" path="usrpwd" for="user-pw-repeat">Repeat
+											password *</form:label> <form:password path="usrpwd" class="string optional" maxlength="255"
 											id="user-pw-repeat" placeholder="Repeat password" 
 											size="50" />
 									</div>
@@ -89,7 +89,7 @@ body {
 									<span
 										class="simform__actions-sidetext">By creating an
 										account you agree to our <a class="special" href="#"
-										target="_blank" role="link">Terms & Privacy</a>
+										target="_blank" role="link">Terms and Privacy</a>
 									</span>
 								</div>
 							</form:form>
@@ -132,18 +132,17 @@ body {
 	</div>
 	<div id="forgotPwd" style="width: 400px; display: none;">
 		<div class="logmod__form">
-			<form action="#" class="simform">
+			<form:form action="sendMail" class="simform" modelAttribute="dusr">
 				<div class="sminputs">
 					<div class="input full">
-						<input class="string optional" maxlength="255" id="user-email"
-							placeholder="Enter your email" type="email" size="50" />
+						<form:input path="usreml" class="string optional" placeholder="Enter your email"  />
 					</div>
 				</div>
 				<div class="simform__actions">
-					<input class="sumbit" name="commit" type="sumbit" readonly
+					<input class="sumbit" name="commit" type="submit" readonly
 						value="Submit" />
 				</div>
-			</form>
+			</form:form>
 		</div>
 	</div>
 </body>

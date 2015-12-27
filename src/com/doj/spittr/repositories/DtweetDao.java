@@ -4,7 +4,6 @@
 package com.doj.spittr.repositories;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.doj.spittr.entities.Dtweet;
 import com.doj.spittr.entities.Dusr;

@@ -75,6 +75,7 @@ public class SpittrPersistenceConfig {
 	    	sessionBuilder.addAnnotatedClass(Dtweet.class);
 	    	sessionBuilder.addAnnotatedClass(DusrRole.class);
 	    	sessionBuilder.addAnnotatedClass(PasswordManagement.class);
+	    	
 	    	return sessionBuilder.buildSessionFactory();
 	    }
 
@@ -87,6 +88,7 @@ public class SpittrPersistenceConfig {
 		final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
 		em.setJpaProperties(additionalProperties());
+		
 		return em;
 	}
 
