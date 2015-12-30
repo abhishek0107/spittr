@@ -84,6 +84,7 @@ public class DflwrDaoImpl implements DflwrDao {
 		query.setParameter("usrid", loginUsr.getUsrid());
 		@SuppressWarnings("unchecked")
 		List<Dflwr> dflwr = query.list();
+		System.out.println("in dao detail");
 		session.close();
 		if (dflwr != null && !dflwr.isEmpty()) {
 			ids = dflwr.get(0).getFlwrfollow();
@@ -136,6 +137,7 @@ public class DflwrDaoImpl implements DflwrDao {
 		Query query = session.createQuery("from Dflwr");
 		@SuppressWarnings("unchecked")
 		List<Dflwr> dflwr = query.list();
+		
 		if (dflwr != null && !dflwr.isEmpty()) {
 			for (Dflwr itrDflwr : dflwr) {
 				if (itrDflwr.getFlwrfollow() != null && itrDflwr.getFlwrfollow().length() > 0) {
@@ -144,7 +146,7 @@ public class DflwrDaoImpl implements DflwrDao {
 					}
 				}
 			}
-
+			session.close();
 			return followerDetailByUsrId(ids);
 		}
 

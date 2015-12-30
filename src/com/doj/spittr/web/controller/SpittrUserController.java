@@ -1,5 +1,7 @@
 package com.doj.spittr.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -8,16 +10,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.doj.spittr.entities.Dusr;
 import com.doj.spittr.entities.PasswordManagement;
+import com.doj.spittr.service.DflwrService;
+import com.doj.spittr.service.DtweetService;
 import com.doj.spittr.service.DusrService;
 
 @Controller
+@SessionAttributes({"loginUser", "Country", "State"})
 public class SpittrUserController {
 	@Autowired
 	DusrService duService;
-
+	@Autowired
+	DflwrService dflwrService;
+	@Autowired
+	DtweetService dtweetService; 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String addUsr(@ModelAttribute("dusr") Dusr dusr, BindingResult result, ModelMap model) {
 		model.addAttribute("dusr", new Dusr());		
@@ -42,8 +51,23 @@ public class SpittrUserController {
 		return "login";
 	}
 	@RequestMapping(value={"/myProfile"})
-	public String profile(@ModelAttribute("dusr") Dusr dusr, BindingResult result, ModelMap model){
+	public String profile(@ModelAttribute("dusr") Dusr dusr,
+			BindingResult result, @ModelAttribute("loginUser") Dusr loginUser,ModelMap model
+			){
 		model.addAttribute("dusr", new Dusr());
+		List<Dusr> allUser2= dflwrService.getMyFollower(loginUser);
+		if(allUser2!=null && !allUser2.isEmpty()){
+			model.addAttribute("NoOfFollowers", allUser2.size());
+		}else{
+			model.addAttribute("NoOfFollowers", 0);
+		}
+		List<Dusr> fUser= dflwrService.getFollowingUser(loginUser);;
+		if(fUser!=null && !fUser.isEmpty()){
+			model.addAttribute("NoOfFollowing", fUser.size());
+		}else{
+			model.addAttribute("NoOfFollowing", 0);
+		}
+		model.addAttribute("tweetCount", dtweetService.readMessage(loginUser).length);
 		model.put("tab", "Profile");
 		return "viewProfile";
 	}

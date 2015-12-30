@@ -58,11 +58,12 @@ public class DAppImageDaoImpl implements DAppImageDao {
 		query.setParameter("appimgusrid", id);
 		@SuppressWarnings("unchecked")
 		List<DAppImage> dAppImage = query.list();
+		session.close();
 		if (dAppImage != null && !dAppImage.isEmpty()) {
 			byte[] bytes;
 			try {
 				bytes = dAppImage.get(0).getAppimgdata().getBytes(1, (int) dAppImage.get(0).getAppimgdata().length());
-				session.close();
+				
 				return bytes;
 			} catch (SQLException e) {
 				e.printStackTrace();

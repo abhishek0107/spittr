@@ -45,6 +45,7 @@ public class DflwrServiceImpl implements DflwrService{
 	 */
 	@Override
 	public List<Dusr> getFollowingUser(Dusr loginUsr) {
+		System.out.println("in getFollowinguser detail");
 		// TODO Auto-generated method stub
 		return this.DflwrDao.getFollowingUser(loginUsr);
 	}
@@ -55,7 +56,7 @@ public class DflwrServiceImpl implements DflwrService{
 	@Override
 	public List<Dusr> getMyFollower(Dusr loginUsr) {
 		// TODO Auto-generated method stub
-		return this.DflwrDao.getFollowingUser(loginUsr);
+		return this.DflwrDao.getMyFollower(loginUsr);
 	}
 
 }

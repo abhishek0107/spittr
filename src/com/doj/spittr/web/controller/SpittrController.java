@@ -48,7 +48,11 @@ public class SpittrController {
 	private AppDataMasterService masterData;
 
 	@RequestMapping(value = { "/login" }, method = { RequestMethod.POST })
-	public String login(ModelMap model, @ModelAttribute("dusr") Dusr dusr, BindingResult result) {		
+	public String login(ModelMap model,
+			@ModelAttribute("dusr") Dusr dusr,
+			BindingResult result) {
+			model.remove("loginUser");
+
 		String email = dusr.getUsreml();
 		String password = dusr.getUsrpwd();
 		String encodedString="";
@@ -68,6 +72,20 @@ public class SpittrController {
 					model.addAttribute("loginUser",loginUser.get(0));
 					model.addAttribute("Country", masterData.getMasterData("country"));
 					model.addAttribute("State", masterData.getMasterData("State"));
+					model.addAttribute("tweetCount", dtweetService.readMessage(loginUser.get(0)).length);
+					List<Dusr> allUser= dflwrService.getMyFollower(loginUser.get(0));
+					if(allUser!=null && !allUser.isEmpty()){
+						model.addAttribute("NoOfFollowers", allUser.size());
+					}else{
+						model.addAttribute("NoOfFollowers", 0);
+					}
+					List<Dusr> fUser= dflwrService.getFollowingUser(loginUser.get(0));;
+					if(fUser!=null && !fUser.isEmpty()){
+						model.addAttribute("NoOfFollowing", fUser.size());
+					}else{
+						model.addAttribute("NoOfFollowing", 0);
+					}					
+					
 					return "viewProfile";
 				}
 			}
@@ -141,6 +159,19 @@ public class SpittrController {
 		model.addAttribute("dtweet", dtweet);
 		model.addAttribute("dtweet", dtweet);
 		model.addAttribute("messageText", dtweetService.readMessage(loginUser));
+		model.addAttribute("tweetCount", dtweetService.readMessage(loginUser).length);
+		List<Dusr> allUser= dflwrService.getMyFollower(loginUser);
+		if(allUser!=null && !allUser.isEmpty()){
+			model.addAttribute("NoOfFollowers", allUser.size());
+		}else{
+			model.addAttribute("NoOfFollowers", 0);
+		}
+		List<Dusr> fUser= dflwrService.getFollowingUser(loginUser);;
+		if(fUser!=null && !fUser.isEmpty()){
+			model.addAttribute("NoOfFollowing", fUser.size());
+		}else{
+			model.addAttribute("NoOfFollowing", 0);
+		}
 		model.put("tab", "Message");
 		return "message";
 	}
@@ -151,6 +182,19 @@ public class SpittrController {
 		dtweetService.readMessage(loginUser);
 		model.addAttribute("dtweet", dtweet);
 		model.addAttribute("messageText", dtweetService.readMessage(loginUser));
+		model.addAttribute("tweetCount", dtweetService.readMessage(loginUser).length);
+		List<Dusr> allUser= dflwrService.getMyFollower(loginUser);
+		if(allUser!=null && !allUser.isEmpty()){
+			model.addAttribute("NoOfFollowers", allUser.size());
+		}else{
+			model.addAttribute("NoOfFollowers", 0);
+		}
+		List<Dusr> fUser= dflwrService.getFollowingUser(loginUser);;
+		if(fUser!=null && !fUser.isEmpty()){
+			model.addAttribute("NoOfFollowing", fUser.size());
+		}else{
+			model.addAttribute("NoOfFollowing", 0);
+		}
 		model.put("tab", "Message");
 		return "message";
 	}
@@ -167,6 +211,19 @@ public class SpittrController {
 				model.addAllAttributes(allUser);
 			}
 		}
+		List<Dusr> allUser2= dflwrService.getMyFollower(loginUser);
+		if(allUser2!=null && !allUser2.isEmpty()){
+			model.addAttribute("NoOfFollowers", allUser2.size());
+		}else{
+			model.addAttribute("NoOfFollowers", 0);
+		}
+		model.addAttribute("tweetCount", dtweetService.readMessage(loginUser).length);
+		List<Dusr> fUser= dflwrService.getFollowingUser(loginUser);;
+		if(fUser!=null && !fUser.isEmpty()){
+			model.addAttribute("NoOfFollowing", fUser.size());
+		}else{
+			model.addAttribute("NoOfFollowing", 0);
+		}
 		model.addAttribute("allUser",allUser);
 		model.put("tab", "Followers");
 		return "myFollowers";
@@ -182,6 +239,19 @@ public class SpittrController {
 				model.addAllAttributes(allUser);
 		}
 		model.addAttribute("allUser",allUser);
+		model.addAttribute("tweetCount", dtweetService.readMessage(loginUser).length);
+		List<Dusr> allUser2= dflwrService.getMyFollower(loginUser);
+		if(allUser2!=null && !allUser2.isEmpty()){
+			model.addAttribute("NoOfFollowers", allUser2.size());
+		}else{
+			model.addAttribute("NoOfFollowers", 0);
+		}
+		List<Dusr> fUser= dflwrService.getFollowingUser(loginUser);;
+		if(fUser!=null && !fUser.isEmpty()){
+			model.addAttribute("NoOfFollowing", fUser.size());
+		}else{
+			model.addAttribute("NoOfFollowing", 0);
+		}
 		model.put("tab", "Followers");
 		return "followers";
 	}
@@ -190,11 +260,25 @@ public class SpittrController {
 	public String following(ModelMap model, @ModelAttribute("dusr") Dusr dusr,
 			@ModelAttribute("dAppImage") DAppImage dAppImage, BindingResult result,
 			@ModelAttribute("loginUser") Dusr loginUser) {
-		List<Dusr> allUser= dflwrService.getMyFollower(loginUser);
+			System.out.println("i am here");
+			List<Dusr> allUser= dflwrService.getFollowingUser(loginUser);
 			if(allUser!=null && !allUser.isEmpty()){
 				model.addAllAttributes(allUser);
 			}
 			model.addAttribute("allUser",allUser);
+			model.addAttribute("tweetCount", dtweetService.readMessage(loginUser).length);
+			List<Dusr> allUser2= dflwrService.getMyFollower(loginUser);
+			if(allUser2!=null && !allUser2.isEmpty()){
+				model.addAttribute("NoOfFollowers", allUser2.size());
+			}else{
+				model.addAttribute("NoOfFollowers", 0);
+			}
+			List<Dusr> fUser= dflwrService.getFollowingUser(loginUser);;
+			if(fUser!=null && !fUser.isEmpty()){
+				model.addAttribute("NoOfFollowing", fUser.size());
+			}else{
+				model.addAttribute("NoOfFollowing", 0);
+			}
 			model.put("tab", "Followers");
 		return "following";
 	}
@@ -210,6 +294,19 @@ public class SpittrController {
 			}
 			model.addAttribute("allUser",allUser);
 
+		}
+		model.addAttribute("tweetCount", dtweetService.readMessage(loginUser).length);
+		List<Dusr> allUser2= dflwrService.getMyFollower(loginUser);
+		if(allUser2!=null && !allUser2.isEmpty()){
+			model.addAttribute("NoOfFollowers", allUser2.size());
+		}else{
+			model.addAttribute("NoOfFollowers", 0);
+		}
+		List<Dusr> fUser= dflwrService.getFollowingUser(loginUser);;
+		if(fUser!=null && !fUser.isEmpty()){
+			model.addAttribute("NoOfFollowing", fUser.size());
+		}else{
+			model.addAttribute("NoOfFollowing", 0);
 		}
 		model.put("tab", "Followers");
 		return "followers";

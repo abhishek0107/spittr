@@ -52,19 +52,14 @@ public class DtweetDaoImpl implements DtweetDao{
 	@Override
 	public String[] readMessage(@ModelAttribute("loginUser") Dusr loginUsr) {
 		Session session =this.sessionFactory.openSession();
-		
 		Query query= session.createSQLQuery("SELECT tweetMSG FROM DTWEET WHERE Tweetusrid= "+loginUsr.getUsrid());
 		List<String> msgStr=query.list();
-		System.out.println("abhishek...."+ msgStr);
 		String msg[]=new String[msgStr.size()];
 		int i=0;
 		for(String m:msgStr){
 			msg[i]=m;
 			i++;
 		}
-		
-			
-		
 		return msg;
 	}
 
